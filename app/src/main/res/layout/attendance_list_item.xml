@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="16dp"
-    android:padding="16dp">
+    android:layout_width="match_parent"
+    android:layout_height="65dp"
+    android:padding="16dp"
+    app:cardBackgroundColor="@android:color/darker_gray">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,33 +14,38 @@
         <TextView
             android:id="@+id/tv_attendance"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            tools:text="71%"
-            android:paddingEnd="16dp"
             android:layout_marginStart="24dp"
-            android:textSize="36sp"/>
+            android:gravity="center"
+            android:paddingEnd="16dp"
+            android:textSize="36sp"
+            tools:text="71%" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginLeft="16dp"
-            android:layout_toLeftOf="@id/tv_attendance">
+            android:layout_toLeftOf="@id/tv_attendance"
+            android:orientation="vertical">
 
             <TextView
+                style="@style/Base.TextAppearance.AppCompat.Headline"
                 android:layout_width="match_parent"
+                android:id="@+id/tv_reg_no"
                 android:layout_height="wrap_content"
-                tools:text="20131847635"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                style="@style/Base.TextAppearance.AppCompat.Headline"/>
+                tools:text="20131847635" />
 
             <TextView
+                style="@style/Base.TextAppearance.AppCompat.Display2"
                 android:layout_width="match_parent"
+                android:id="@+id/tv_name"
                 android:layout_height="wrap_content"
-                tools:text="Amusuo Paschal C"/>
+                android:textSize="20dp"
+                tools:text="Amusuo Paschal C" />
         </LinearLayout>
 
     </RelativeLayout>
