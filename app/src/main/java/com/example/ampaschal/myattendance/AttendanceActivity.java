@@ -8,10 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.ampaschal.myattendance.adapters.AttendanceAdapter;
 import com.example.ampaschal.myattendance.database.models.RetreivedStudent;
-import com.example.ampaschal.myattendance.database.models.StudentAttendance;
+import com.example.ampaschal.myattendance.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class AttendanceActivity extends AppCompatActivity {
     private List<RetreivedStudent> studentList = new ArrayList<>();;
     private AttendanceAdapter attendanceAdapter;
     private RecyclerView recyclerView;
+    private TextView tvCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,9 @@ public class AttendanceActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String pos = getIntent().getStringExtra("KEY");
+        String course = getIntent().getStringExtra(MainActivity.TAG_COURSE);
+        tvCourse = findViewById(R.id.tv_course);
+        tvCourse.setText("Course: " + course);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 

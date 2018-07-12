@@ -62,6 +62,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         holder.tvCourseCode.setText(course.getCourseCode());
         holder.tvCourseTitle.setText(course.getCourseTitle());
         //holder.tvClassesHeld.setText("Number of classes held: " + course.getNoClasses());
+        holder.itemView.setTag(course.getCourseCode());
 
     }
 

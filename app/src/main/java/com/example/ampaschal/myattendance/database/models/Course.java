@@ -32,9 +32,9 @@ public class Course {
 
     private Date lastClassHeld;
 
-    public Course(String courseCode, String coursseTitle) {
+    public Course(String courseCode, String courseTitle) {
         this.courseCode = courseCode;
-        this.courseTitle = coursseTitle;
+        this.courseTitle = courseTitle;
     }
 
     public String getCourseCode() {

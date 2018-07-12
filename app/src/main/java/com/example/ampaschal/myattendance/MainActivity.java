@@ -22,6 +22,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 implements CourseAdapter.OnCourseItemClick{
+    public final static String TAG_COURSE = "Course code";
     private RecyclerView recyclerView;
     private CourseAdapter courseAdapter;
     private List<Course> courseList = new ArrayList<>();
@@ -77,10 +78,11 @@ implements CourseAdapter.OnCourseItemClick{
 
     @Override
     public void onCourseClick(View view, int pos) {
-        Intent intent = new Intent(this, AttendanceActivity.class);
-        intent.putExtra("KEY", pos);
+        Toast.makeText(this, "Course clicked on "+pos + " with courseCode "
+                +view.getTag().toString(), Toast.LENGTH_SHORT).show();
+        Intent intent= new Intent(MainActivity.this, AttendanceActivity.class);
+        intent.putExtra(TAG_COURSE, view.getTag().toString());
         startActivity(intent);
-        Toast.makeText(this, "Course clicked on "+pos, Toast.LENGTH_SHORT).show();
     }
 
     private List<Course> getMockCourses(){
