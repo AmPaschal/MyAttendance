@@ -1,15 +1,31 @@
 package com.example.ampaschal.myattendance;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.ampaschal.myattendance.adapters.CourseAdapter;
+import com.example.ampaschal.myattendance.database.AppDatabase;
+import com.example.ampaschal.myattendance.database.models.Course;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity
+implements CourseAdapter.OnCourseItemClick{
+    private RecyclerView recyclerView;
+    private CourseAdapter courseAdapter;
+    private List<Course> courseList = new ArrayList<>();
+    private AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +33,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        appDatabase = AppDatabase.getInsstance(this);
+        recyclerView = findViewById(R.id.rv_courses);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        courseList = appDatabase.courseDao().getallCourses();
+        courseAdapter = new CourseAdapter(getMockCourses(), this);
+        courseAdapter.setOnCourseItemClick(this);
+        recyclerView.setAdapter(courseAdapter);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -43,10 +68,36 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCourseClick(View view, int pos) {
+        Intent intent = new Intent(this, AttendanceActivity.class);
+        intent.putExtra("KEY", pos);
+        startActivity(intent);
+        Toast.makeText(this, "Course clicked on "+pos, Toast.LENGTH_SHORT).show();
+    }
+
+    private List<Course> getMockCourses(){
+        Course course = new Course("COE 504", "Microwave Transmission");
+        courseList.add(course);
+
+        course = new Course("COE 506", "Network Planning and Management");
+        courseList.add(course);
+
+        course = new Course("COE 508", "Principles of Radar");
+        courseList.add(course);
+
+        course = new Course("COE 510", "Reliability Engineering");
+        courseList.add(course);
+
+        return courseList;
+
+
     }
 }

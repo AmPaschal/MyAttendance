@@ -1,41 +1,40 @@
 package com.example.ampaschal.myattendance.database.models;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 /**
  * Created by AmPaschal on 09/07/2018.
  */
-
+@Entity
 public class StudentAttendance {
-    private int regNo;
-    private String name;
-    private int percentageAttendance;
+    @PrimaryKey @NonNull
+    private String regNo;
+    private int noClassesAttended;
 
-    public StudentAttendance(int regNo, String name, int percentageAttendance) {
-        this.regNo = regNo;
-        this.name = name;
-        this.percentageAttendance = percentageAttendance;
+    public StudentAttendance() {
     }
 
-    public int getRegNo() {
+    public StudentAttendance(String regNo, String name, int noClassesAttended) {
+        this.regNo = regNo;
+        this.noClassesAttended = noClassesAttended;
+    }
+
+    public String getRegNo() {
         return regNo;
     }
 
-    public void setRegNo(int regNo) {
+    public void setRegNo(String regNo) {
         this.regNo = regNo;
     }
 
-    public String getName() {
-        return name;
+    public int getNoClassesAttended() {
+        return noClassesAttended;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNoClassesAttended(int noClassesAttended) {
+        this.noClassesAttended = noClassesAttended;
     }
 
-    public int getPercentageAttendance() {
-        return percentageAttendance;
-    }
-
-    public void setPercentageAttendance(int percentageAttendance) {
-        this.percentageAttendance = percentageAttendance;
-    }
 }

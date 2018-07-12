@@ -3,12 +3,18 @@ package com.example.ampaschal.myattendance.database.models;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
+
+import com.example.ampaschal.myattendance.database.DateConverter;
+
+import java.util.Date;
 
 /**
  * Created by AmPaschal on 06/07/2018.
  */
 @Entity
+@TypeConverters(DateConverter.class)
 public class Course {
     @PrimaryKey
     @NonNull
@@ -16,7 +22,7 @@ public class Course {
     private String courseCode;
 
     @ColumnInfo(name = "course_title")
-    private String coursseTitle;
+    private String courseTitle;
 
     @ColumnInfo(name = "no_units")
     private String noUnits;
@@ -24,9 +30,11 @@ public class Course {
     @ColumnInfo(name = "no_classes")
     private int noClasses;
 
+    private Date lastClassHeld;
+
     public Course(String courseCode, String coursseTitle) {
         this.courseCode = courseCode;
-        this.coursseTitle = coursseTitle;
+        this.courseTitle = coursseTitle;
     }
 
     public String getCourseCode() {
@@ -37,12 +45,12 @@ public class Course {
         this.courseCode = courseCode;
     }
 
-    public String getCoursseTitle() {
-        return coursseTitle;
+    public String getCourseTitle() {
+        return courseTitle;
     }
 
-    public void setCoursseTitle(String coursseTitle) {
-        this.coursseTitle = coursseTitle;
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
     }
 
     public String getNoUnits() {
@@ -59,5 +67,13 @@ public class Course {
 
     public void setNoClasses(int noClasses) {
         this.noClasses = noClasses;
+    }
+
+    public Date getLastClassHeld() {
+        return lastClassHeld;
+    }
+
+    public void setLastClassHeld(Date lastClassHeld) {
+        this.lastClassHeld = lastClassHeld;
     }
 }

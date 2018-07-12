@@ -18,10 +18,10 @@ public class Attendance {
     private int id;
 
     private String courseCode;
-    private int regNo;
+    private String regNo;
     private Date timestamp;
 
-    public Attendance(String courseCode, int regNo, Date timestamp) {
+    public Attendance(String courseCode, String regNo, Date timestamp) {
         this.courseCode = courseCode;
         this.regNo = regNo;
         this.timestamp = timestamp;
@@ -43,11 +43,11 @@ public class Attendance {
         this.courseCode = courseCode;
     }
 
-    public int getRegNo() {
+    public String getRegNo() {
         return regNo;
     }
 
-    public void setRegNo(int regNo) {
+    public void setRegNo(String regNo) {
         this.regNo = regNo;
     }
 

@@ -1,5 +1,6 @@
 package com.example.ampaschal.myattendance.adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,52 +9,74 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.ampaschal.myattendance.R;
-import com.example.ampaschal.myattendance.database.models.StudentAttendance;
+import com.example.ampaschal.myattendance.database.models.Course;
 
-import java.util.ArrayList;
-import java.util.zip.Inflater;
+import java.util.List;
 
 /**
- * Created by AmPaschal on 09/07/2018.
+ * Created by AmPaschal on 11/07/2018.
  */
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder>{
-    private ArrayList<StudentAttendance> studentList;
+    private List<Course> courseList;
+    private OnCourseItemClick onCourseItemClick;
+    private Context context;
 
-    private CourseAdapter(ArrayList list){
-        this.studentList = list;
+
+    class CourseViewHolder extends RecyclerView.ViewHolder
+    implements View.OnClickListener{
+        private TextView tvCourseCode, tvCourseTitle, tvClassesHeld;
+
+        public CourseViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvCourseCode = itemView.findViewById(R.id.tv_course_code);
+            tvCourseTitle = itemView.findViewById(R.id.tv_course_title);
+            tvClassesHeld = itemView.findViewById(R.id.tv_classes_held);
+            itemView.setOnClickListener(this);
+        }
+
+
+        @Override
+        public void onClick(View view) {
+            onCourseItemClick.onCourseClick(view, getAdapterPosition());
+        }
+    }
+
+    public CourseAdapter(List<Course> courseList, Context context) {
+        this.courseList = courseList;
+        this.context = context;
+        this.onCourseItemClick = (OnCourseItemClick)context;
     }
 
     @NonNull
     @Override
     public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.attendance_list_item, parent, false);
+                .inflate(R.layout.course_list_item, parent, false);
         return new CourseViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
-        holder.tvAttendance.setText(studentList.get(position).getPercentageAttendance());
-        holder.tvRegNo.setText(studentList.get(position).getRegNo());
-        holder.tvName.setText(studentList.get(position).getName());
-
+        Course course = courseList.get(position);
+        holder.tvCourseCode.setText(course.getCourseCode());
+        holder.tvCourseTitle.setText(course.getCourseTitle());
+        //holder.tvClassesHeld.setText("Number of classes held: " + course.getNoClasses());
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return courseList.size();
     }
 
-    class CourseViewHolder extends RecyclerView.ViewHolder{
-        private TextView tvAttendance, tvRegNo, tvName;
-
-        public CourseViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tvAttendance = itemView.findViewById(R.id.tv_attendance);
-            tvRegNo = itemView.findViewById(R.id.tv_reg_no);
-            tvName = itemView.findViewById(R.id.tv_name);
-        }
+    public interface OnCourseItemClick{
+        void onCourseClick(View view, int pos);
     }
+
+    public void setOnCourseItemClick(OnCourseItemClick onCourseItemClick){
+        this.onCourseItemClick = onCourseItemClick;
+    }
+
+
 }

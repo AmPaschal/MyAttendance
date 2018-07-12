@@ -27,6 +27,6 @@ public interface StudentDao {
     @Query("SELECT * FROM Students")
     List<Student> getAllStudents();
 
-    @Query("SELECT * FROM Students WHERE regNo = :regNo")
-    Student getStudent(int regNo);
+    @Query("SELECT * FROM Students WHERE regNo LIKE :regNo")
+    Student getStudent(String regNo);
 }
