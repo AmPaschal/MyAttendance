@@ -35,7 +35,7 @@ implements CourseAdapter.OnCourseItemClick{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        appDatabase = AppDatabase.getInsstance(this);
+        appDatabase = AppDatabase.getInstance(this);
         recyclerView = findViewById(R.id.rv_courses);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         courseList = appDatabase.courseDao().getallCourses();

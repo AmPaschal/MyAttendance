@@ -8,6 +8,7 @@ import com.example.ampaschal.myattendance.database.models.RetreivedStudent;
 import com.example.ampaschal.myattendance.database.models.StudentAttendance;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class DatabaseHelper {
 
     public DatabaseHelper(Context context){
         this.context = context;
-        appDatabase = AppDatabase.getInsstance(context);
+        appDatabase = AppDatabase.getInstance(context);
 
     }
 
@@ -65,5 +66,22 @@ public class DatabaseHelper {
         }
 
         return retreivedStudentList;
+    }
+
+    public List<RetreivedStudent> retreiveSortedAttendance(String course, Date date){
+        List<RetreivedStudent> retreivedStudentList = new ArrayList<>();
+        List<Attendance> attendanceList =
+                appDatabase.attendanceDao().getAttendanceForCourseAndDate(course, date);
+
+        for (Attendance attendance: attendanceList){
+            String regNo = attendance.getRegNo();
+            String name = appDatabase.studentDao().getStudent(regNo).getName();
+            String percentageAttendance = "";
+
+            RetreivedStudent retreivedStudent = new RetreivedStudent(regNo, name, percentageAttendance);
+            retreivedStudentList.add(retreivedStudent);
+        }
+        return retreivedStudentList;
+
     }
 }

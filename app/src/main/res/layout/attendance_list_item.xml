@@ -3,18 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="65dp"
-    android:padding="16dp"
-    app:cardBackgroundColor="@android:color/darker_gray">
+    android:layout_height="wrap_content"
+    android:elevation="4dp"
+    app:cardBackgroundColor="@android:color/transparent">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/tv_attendance"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="24dp"
@@ -31,22 +33,24 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_reg_no"
                 style="@style/Base.TextAppearance.AppCompat.Headline"
                 android:layout_width="match_parent"
-                android:id="@+id/tv_reg_no"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 tools:text="20131847635" />
 
             <TextView
+                android:id="@+id/tv_name"
                 style="@style/Base.TextAppearance.AppCompat.Display2"
                 android:layout_width="match_parent"
-                android:id="@+id/tv_name"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 tools:text="Amusuo Paschal C" />
         </LinearLayout>
 
     </RelativeLayout>
+
+
 </android.support.design.card.MaterialCardView>

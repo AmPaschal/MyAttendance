@@ -29,7 +29,7 @@ public abstract class AppDatabase extends RoomDatabase{
     private static Object LOCK = new Object();
     private static volatile AppDatabase sInsstance;
 
-    public static AppDatabase getInsstance(Context context){
+    public static AppDatabase getInstance(Context context){
         if (sInsstance == null) {
             synchronized (LOCK){
                 if (sInsstance == null){
